@@ -3,12 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>007: Agent Protocol</title>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <title>007: First Light</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 1200px;
+            height: 800px;
+            background: #1a1a1a;
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 20px #00ff00;
+        }
+        
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #00ff00;
+            font-size: 14px;
+            z-index: 100;
+            text-shadow: 0 0 5px #00ff00;
+            pointer-events: none;
+        }
+        
+        #ui p {
+            margin: 5px 0;
+        }
+        
+        #status {
+            color: #ffff00;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <div id="game-container"></div>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="1200" height="800"></canvas>
+        <div id="ui">
+            <p id="health">HEALTH: 100</p>
+            <p id="score">SCORE: 0</p>
+            <p id="targets">TARGETS: 0/5</p>
+            <p id="status">GAME LOADING...</p>
+        </div>
+    </div>
+
     <script src="game.js"></script>
 </body>
 </html>
