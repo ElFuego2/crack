@@ -129,7 +129,8 @@ const maps = [
 
 const TILE = 64;
 const FOV = Math.PI / 3;
-const NUM_RAYS = canvas.width;
+const NUM_RAYS = Math.floor(canvas.width / 2);
+const SLICE_WIDTH = canvas.width / NUM_RAYS;
 const MAX_DEPTH = 1024;
 const HALF_HEIGHT = canvas.height / 2;
 const PROJ_COEFF = (canvas.width / 2) / Math.tan(FOV / 2);
@@ -320,10 +321,12 @@ function drawScene() {
     const wallHeight = (TILE / correctedDistance) * PROJ_COEFF;
     const wallTop = Math.floor(HALF_HEIGHT - wallHeight / 2);
     const wallBottom = Math.floor(HALF_HEIGHT + wallHeight / 2);
+    const xPos = Math.floor(column * SLICE_WIDTH);
+    const width = Math.ceil(SLICE_WIDTH);
 
     const shade = ray.hitVertical ? 0.75 : 1;
     ctx.fillStyle = shadeColor(ray.wallColor, shade);
-    ctx.fillRect(column, wallTop, 1, wallBottom - wallTop);
+    ctx.fillRect(xPos, wallTop, width, wallBottom - wallTop);
     zBuffer[column] = correctedDistance;
   }
 
@@ -639,7 +642,8 @@ function drawGore(zBuffer) {
     let delta = normalizeAngle(angleToGore - player.angle);
     if (delta > Math.PI) delta -= Math.PI * 2;
     if (Math.abs(delta) >= FOV / 2) return;
-    const size = ((g.type === 'limb' ? 1.2 : 0.7) * TILE / distance) * PROJ_COEFF;
+    const safeDistance = Math.max(distance, 25);
+    const size = ((g.type === 'limb' ? 1.2 : 0.7) * TILE / safeDistance) * PROJ_COEFF;
     const screenX = Math.tan(delta) * PROJ_COEFF + canvas.width / 2 - size / 2;
     const screenY = HALF_HEIGHT - size * 0.7;
     const alpha = Math.max(0, g.life / 70);
