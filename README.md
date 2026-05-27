@@ -1,64 +1,55 @@
-# 007: Agent Protocol
+# 007: First Light
 
-A spy action game built with Phaser 3. Take on the role of secret agent Bond and eliminate enemy operatives!
+A 3D-style raycaster spy shooter built in pure HTML5 Canvas. Step into the shoes of Agent 007, infiltrate the facility, eliminate enemy operatives, and survive the mission.
 
 ## 🎮 Gameplay
 
-- **Objective**: Eliminate 5 enemy agents to complete your mission
+- **Objective**: Navigate the underground base, clear the enemies, and stay alive.
 - **Controls**:
-  - **Arrow Keys**: Move around the arena
-  - **Mouse Click / SPACE**: Shoot in the direction of your cursor
-  - **R**: Restart the game
-  - **SPACE**: Continue after game over
+  - **W / S**: Move forward / backward
+  - **A / D**: Turn left / right
+  - **Q / E**: Strafe left / right
+  - **SPACE**: Shoot
+  - **R**: Restart the mission
 
 ## 🕵️ Features
 
-- **Player Character**: You control Agent Bond (green square)
-- **Enemy AI**: Red enemy agents that patrol and chase you when spotted
-- **Combat**: Shoot enemies with yellow bullets
-- **Damage System**: Both you and enemies take damage from bullets
-- **Health**: You have 100 health, lose health when hit by enemy fire
-- **Scoring**: Earn 100 points for each enemy eliminated
-- **Mission Tracking**: Track your progress toward the 5-enemy objective
+- **3D raycast rendering** inspired by early Doom-style shooters
+- **Enemy sprites** projected into the 3D view
+- **Health and ammo pickups** scattered through the map
+- **Mini-map overlay** for tactical navigation
+- **Dynamic UI** rendered directly inside the game canvas
+- **Spy-thriller styling** with a 007-themed mission briefing
 
-## 🏃 How to Play
+## 🏃 How to Run
 
-1. Open `index.html` in your web browser
-2. Use arrow keys to move around the arena
-3. Click or press SPACE to shoot enemies
-4. Enemies will chase you when you get close (within 300 pixels)
-5. Eliminate all 5 enemies to win the mission
-6. Avoid enemy fire - if your health reaches 0, you lose
-7. Press R at any time to restart, or SPACE at game over
+1. Open `index.html` in your browser, or use a local server.
+2. Use the controls above to move, turn, strafe, and shoot.
+3. Survive, collect pickups, and eliminate enemies.
+4. Press **R** to restart the mission at any time.
 
-## 📊 Game Elements
+## 📦 Files
 
-- **Player (Green)**: Your character - don't let it get destroyed
-- **Enemies (Red)**: Target these enemies with your gunfire
-- **Bullets (Yellow/Orange)**: Your shots (yellow) and enemy shots (orange)
-- **Health**: Displayed in top-left corner
-- **Score**: Tracks mission progress
+- `index.html` — Game host page and canvas layout
+- `game.js` — Raycaster game logic and enemy systems
+- `styles.css` — Visual styling for the page
+- `package.json` — Project metadata and helper scripts
 
-## 🛠️ Technical Details
+## 🛠️ Run Locally
 
-- Built with **Phaser 3** game framework
-- Uses arcade physics for movement and collision
-- Dynamic enemy spawning and AI
-- Procedurally generated graphics (no external assets needed)
-- Responsive controls and smooth gameplay
+Recommended: use a local web server.
 
-## 🎯 Tips for Success
+```bash
+cd /workspaces/crack
+python3 -m http.server 8000
+```
 
-1. Keep moving - standing still makes you an easy target
-2. Use the edges of the screen for cover
-3. Try to engage one enemy at a time
-4. Lead your shots - enemies move quickly
-5. When surrounded, move toward the edges to break line of sight
+Then visit: `http://localhost:8000`
 
-## 📝 License
+## 🎯 Notes
 
-Licensed under the MIT License. See LICENSE file for details.
+This is a retro-inspired 3D shooter experience built without external game engines. The raycaster gives the illusion of depth using texture-less wall slices and simple enemy sprites.
 
----
+## 🔧 License
 
-**Ready for your next mission, Agent?** Good luck! 🔫
+Licensed under the MIT License. See `LICENSE` for details.

@@ -1,7 +1,7 @@
 {
-  "name": "007-agent-protocol",
+  "name": "007-first-light",
   "version": "1.0.0",
-  "description": "A spy action game built with Phaser 3",
+  "description": "A 3D-style raycaster spy shooter built with HTML5 Canvas",
   "main": "game.js",
   "scripts": {
     "start": "python3 -m http.server 8000",
@@ -10,10 +10,10 @@
   "keywords": [
     "007",
     "game",
-    "phaser",
-    "spy",
-    "action"
+    "raycaster",
+    "shooter",
+    "spy"
   ],
-  "author": "Agent Protocol",
+  "author": "007: First Light",
   "license": "MIT"
 }
