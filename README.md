@@ -10,16 +10,17 @@ A 3D-style raycaster spy shooter built in pure HTML5 Canvas. Step into the shoes
   - **A / D**: Turn left / right
   - **Q / E**: Strafe left / right
   - **SPACE**: Shoot
-  - **R**: Restart the mission
+  - **R**: Reload pistol
+  - **T**: Load a new map
 
 ## 🕵️ Features
 
 - **3D raycast rendering** inspired by early Doom-style shooters
-- **Enemy sprites** projected into the 3D view
-- **Health and ammo pickups** scattered through the map
-- **Mini-map overlay** for tactical navigation
-- **Dynamic UI** rendered directly inside the game canvas
-- **Spy-thriller styling** with a 007-themed mission briefing
+- **Humanoid enemy models** with attack behavior
+- **Pistol model drawn in first-person view**
+- **Reload system** with 7-shot magazine and reserve ammo
+- **Blood and gore effects** for kills and dismemberment
+- **Multiple maps** with varied wall and lighting colors
 
 ## 🏃 How to Run
 

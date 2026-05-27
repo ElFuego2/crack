@@ -40,7 +40,8 @@ You can also open `index.html` straight in your browser, but a local server is r
 - **A / D**: Turn left / right
 - **Q / E**: Strafe left / right
 - **SPACE**: Shoot
-- **R**: Restart the mission
+- **R**: Reload pistol
+- **T**: Load a new map
 
 ## Gameplay
 
