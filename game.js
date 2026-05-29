@@ -129,9 +129,10 @@ const maps = [
 
 const TILE = 64;
 const FOV = Math.PI / 3;
-const NUM_RAYS = Math.floor(canvas.width / 2);
+const NUM_RAYS = Math.floor(canvas.width / 4);
 const SLICE_WIDTH = canvas.width / NUM_RAYS;
-const MAX_DEPTH = 1024;
+const MAX_DEPTH = 512;
+const MAX_STEPS = 512;
 const HALF_HEIGHT = canvas.height / 2;
 const PROJ_COEFF = (canvas.width / 2) / Math.tan(FOV / 2);
 
@@ -255,7 +256,7 @@ function castRay(rayAngle) {
   let nextX = xIntercept;
   let nextY = yIntercept;
 
-  for (let i = 0; i < MAX_DEPTH; i++) {
+  for (let i = 0; i < MAX_STEPS; i++) {
     const tileX = Math.floor((nextX + (isFacingRight ? 0 : -1)) / TILE);
     const tileY = Math.floor(nextY / TILE);
     if (mapHasWall(tileX, tileY)) {
@@ -284,7 +285,7 @@ function castRay(rayAngle) {
   nextX = xIntercept;
   nextY = yIntercept;
 
-  for (let i = 0; i < MAX_DEPTH; i++) {
+  for (let i = 0; i < MAX_STEPS; i++) {
     const tileX = Math.floor(nextX / TILE);
     const tileY = Math.floor((nextY + (isFacingDown ? 0 : -1)) / TILE);
     if (mapHasWall(tileX, tileY)) {
@@ -630,6 +631,9 @@ function updateGore() {
     g.y += g.dy;
     g.life -= 1;
     if (g.life <= 0) goreEffects.splice(i, 1);
+  }
+  while (goreEffects.length > 48) {
+    goreEffects.shift();
   }
 }
 

@@ -15,5 +15,17 @@
     "spy"
   ],
   "author": "007: First Light",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElFuego2/crack.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ElFuego2/crack/issues"
+  },
+  "homepage": "https://github.com/ElFuego2/crack#readme",
+  "dependencies": {
+    "@playwright/test": "^1.60.0"
+  }
 }
