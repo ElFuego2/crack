@@ -229,6 +229,11 @@ function getWallColor(tile) {
   return maps[currentMapIndex].wallColors[tile] || '#999999';
 }
 
+function getMapTile(tileX, tileY) {
+  if (tileX < 0 || tileY < 0 || tileX >= MAP[0].length || tileY >= MAP.length) return 1;
+  return MAP[tileY][tileX];
+}
+
 function castRay(rayAngle) {
   rayAngle = normalizeAngle(rayAngle);
   const isFacingDown = rayAngle > 0 && rayAngle < Math.PI;
@@ -260,7 +265,7 @@ function castRay(rayAngle) {
     const tileX = Math.floor((nextX + (isFacingRight ? 0 : -1)) / TILE);
     const tileY = Math.floor(nextY / TILE);
     if (mapHasWall(tileX, tileY)) {
-      const tileValue = MAP[tileY][tileX];
+      const tileValue = getMapTile(tileX, tileY);
       wallHitX = nextX;
       wallHitY = nextY;
       wallColor = getWallColor(tileValue);
@@ -291,7 +296,7 @@ function castRay(rayAngle) {
     if (mapHasWall(tileX, tileY)) {
       const horizDist = Math.hypot(nextX - player.x, nextY - player.y);
       if (horizDist < vertDist) {
-        const tileValue = MAP[tileY][tileX];
+        const tileValue = getMapTile(tileX, tileY);
         wallHitX = nextX;
         wallHitY = nextY;
         wallColor = getWallColor(tileValue);
@@ -367,7 +372,8 @@ function drawEnemies(zBuffer) {
     const size = (TILE / sprite.distance) * PROJ_COEFF;
     const spriteX = Math.tan(sprite.angle) * PROJ_COEFF + canvas.width / 2 - size / 2;
     const screenX = Math.floor(spriteX);
-    const screenY = HALF_HEIGHT - size * 0.8;
+    const spriteFloorY = canvas.height - 120;
+    const screenY = Math.max(0, spriteFloorY - Math.floor(size));
     const width = Math.floor(size);
     const height = Math.floor(size);
 
@@ -649,7 +655,7 @@ function drawGore(zBuffer) {
     const safeDistance = Math.max(distance, 25);
     const size = ((g.type === 'limb' ? 1.2 : 0.7) * TILE / safeDistance) * PROJ_COEFF;
     const screenX = Math.tan(delta) * PROJ_COEFF + canvas.width / 2 - size / 2;
-    const screenY = HALF_HEIGHT - size * 0.7;
+    const screenY = Math.max(0, (canvas.height - 120) - size * 0.6);
     const alpha = Math.max(0, g.life / 70);
     ctx.fillStyle = `rgba(${parseInt(g.color.slice(1, 3), 16)},${parseInt(g.color.slice(3, 5), 16)},${parseInt(g.color.slice(5), 16)},${alpha})`;
     ctx.fillRect(screenX, screenY, size, size * 0.35);
@@ -703,9 +709,33 @@ function drawWeapon() {
   ctx.strokeRect(centerX - 40, baseY + 26, 50, 14);
 }
 
+function drawCrosshair() {
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255,255,255,0.95)';
+  ctx.fillStyle = 'rgba(255,255,255,0.95)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(centerX - 10, centerY);
+  ctx.lineTo(centerX - 3, centerY);
+  ctx.moveTo(centerX + 3, centerY);
+  ctx.lineTo(centerX + 10, centerY);
+  ctx.moveTo(centerX, centerY - 10);
+  ctx.lineTo(centerX, centerY - 3);
+  ctx.moveTo(centerX, centerY + 3);
+  ctx.lineTo(centerX, centerY + 10);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
 function render() {
   drawScene();
   drawWeapon();
+  drawCrosshair();
   drawMinimap();
 }
 
